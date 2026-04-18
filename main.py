@@ -11,13 +11,14 @@ from handlers.handlers.admin import admin_confirm_handler, admin_decline_handler
 from handlers.handlers.my_bookings import my_bookings_handler, cancel_booking_handler
 from handlers.handlers.faq import faq_handler, faq_answer_handler
 from database import init_db
+import asyncio
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
 
-def main():
+async def main():
     init_db()
     app = Application.builder().token(BOT_TOKEN).build()
 
@@ -40,7 +41,7 @@ def main():
     app.add_handler(CallbackQueryHandler(faq_handler, pattern="^faq$"))
     app.add_handler(CallbackQueryHandler(faq_answer_handler, pattern="^faq_"))
 
-    app.run_polling()
+    await app.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
