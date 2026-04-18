@@ -2,14 +2,14 @@ import logging
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ConversationHandler
 
 from config import BOT_TOKEN
-from handlers.start import start_handler
-from handlers.booking import (
+from handlers.handlers.start import start_handler
+from handlers.handlers.booking import (
     booking_handler, visit_type_handler, datetime_input_handler,
     confirm_booking_handler, VISIT_TYPE, DATETIME_INPUT
 )
-from handlers.admin import admin_confirm_handler, admin_decline_handler
-from handlers.my_bookings import my_bookings_handler, cancel_booking_handler
-from handlers.faq import faq_handler, faq_answer_handler
+from handlers.handlers.admin import admin_confirm_handler, admin_decline_handler
+from handlers.handlers.my_bookings import my_bookings_handler, cancel_booking_handler
+from handlers.handlers.faq import faq_handler, faq_answer_handler
 from database import init_db
 
 logging.basicConfig(
