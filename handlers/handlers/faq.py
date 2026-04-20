@@ -36,8 +36,8 @@ async def faq_answer_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
         return
     await query.edit_message_text("⏳ Шукаю відповідь...")
     try:
-        client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
-        message = client.messages.create(
+         client = anthropic.AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+        message = await client.messages.create(
             model="claude-opus-4-6",
             max_tokens=400,
             system=SYSTEM_PROMPT,
